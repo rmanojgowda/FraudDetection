@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Secure Payment - MITM Simulation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f3f3;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      background-color: #131921;
+      padding: 10px 20px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header .logo img {
+      width: 100px;
+    }
+
+    .nav-links a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin: 15px 0 5px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+
+    .note {
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 10px;
+    }
+
+    .pay-btn {
+      margin-top: 20px;
+      width: 100%;
+      padding: 15px;
+      background-color: #ff9900;
+      border: none;
+      color: white;
+      font-size: 18px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .pay-btn:hover {
+      background-color: #e88b00;
+    }
+
+    #status {
+      margin-top: 20px;
+      padding: 15px;
+      text-align: center;
+      font-weight: bold;
+      border-radius: 5px;
+      display: none;
+    }
+
+    .success {
+      background-color: #d4edda;
+      color: #155724;
+    }
+
+    .error {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo">
+      <img src="amazon_logo.png" alt="Amazon Logo" />
+    </div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Account</a>
+      <a href="#">Cart</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>Enter Payment Details</h2>
+
+    <label for="cardNumber">Card Number</label>
+    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" />
+
+    <label for="amount">Intended Transaction Amount</label>
+    <input type="number" id="amount" placeholder="e.g. 10000" />
+
+    <label for="shownAmountInterview">Displayed Amount (Interviewer View)</label>
+    <input type="number" id="shownAmountInterview" readonly />
+    <div class="note">This is visible for demo to show tampered value (MITM simulation)</div>
+
+    <label for="shownAmountMasked">Displayed Amount (User Sees)</label>
+    <input type="text" id="shownAmountMasked" value="*****" readonly />
+    <div class="note">This is what the victim sees on screen — masked or normal looking</div>
+
+    <button class="pay-btn" onclick="submitPayment()">Submit Payment</button>
+
+    <div id="status"></div>
+  </div>
+
+  <script>
+    const amountInput = document.getElementById("amount");
+    const shownAmountInterview = document.getElementById("shownAmountInterview");
+    const shownAmountMasked = document.getElementById("shownAmountMasked");
+
+    amountInput.addEventListener("input", () => {
+      const actualAmount = parseFloat(amountInput.value);
+      if (!isNaN(actualAmount)) {
+        const tampered = Math.random() < 0.5;
+        const finalAmount = tampered
+          ? actualAmount + Math.floor(Math.random() * 500 + 50)
+          : actualAmount;
+
+        shownAmountInterview.value = finalAmount;
+        shownAmountMasked.value = "*****"; // user sees stars, gets tricked
+      } else {
+        shownAmountInterview.value = "";
+        shownAmountMasked.value = "";
+      }
+    });
+
+    function submitPayment() {
+      const card = document.getElementById("cardNumber").value.trim();
+      const amount = parseFloat(document.getElementById("amount").value.trim());
+      const shownAmount = parseFloat(document.getElementById("shownAmountInterview").value.trim());
+      const statusBox = document.getElementById("status");
+
+      statusBox.style.display = "none";
+
+      if (!card || isNaN(amount) || isNaN(shownAmount) || card.length < 16) {
+        statusBox.innerText = "Please enter valid details.";
+        statusBox.className = "error";
+        statusBox.style.display = "block";
+        return;
+      }
+
+      fetch("http://127.0.0.1:5000/payment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ card, amount, shownAmount })
+      })
+      .then(res => res.json())
+      .then(data => {
+        statusBox.innerText = "Fraud Status: " + data.status.toUpperCase();
+        statusBox.className = data.status === "fraud" ? "error" : "success";
+        statusBox.style.display = "block";
+      })
+      .catch(err => {
+        console.error(err);
+        statusBox.innerText = "Error contacting server.";
+        statusBox.className = "error";
+        statusBox.style.display = "block";
+      });
+    }
+  </script>
+
+</body>
+</html>

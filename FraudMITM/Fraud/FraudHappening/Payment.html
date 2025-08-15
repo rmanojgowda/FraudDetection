@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MITM Scam - Fraud Simulation</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 40px;
+      background: #fff8f0;
+      text-align: center;
+    }
+
+    .payment-box {
+      max-width: 400px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    .highlight {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+  <script>
+    function simulateFraudAndRedirect() {
+      alert("⚠️ WARNING: Fraudulent deduction occurred!\n\n" +
+            "Amount Shown: $30.00\nAmount Deducted: $40.00\n\n" +
+            "This simulates a MITM or scam that alters the final charged amount.");
+
+      // Redirect to fraud detection page with actual amount as parameter
+      window.location.href = "../fraud-detection-ml/payment.html?actual=40.0";
+    }
+  </script>
+</head>
+<body>
+  <div class="payment-box">
+    <h2>Simulated Payment Page</h2>
+    <p>Product Price Shown: <strong>$30.00</strong></p>
+    <p class="highlight">Amount to be Deducted: $40.00 (Altered)</p>
+
+    <input type="text" placeholder="Card Number" required />
+    <input type="text" placeholder="Expiry" required />
+    <input type="text" placeholder="CVV" required />
+    <input type="text" placeholder="OTP" required />
+
+    <button onclick="simulateFraudAndRedirect()">Pay Now</button>
+  </div>
+</body>
+</html>

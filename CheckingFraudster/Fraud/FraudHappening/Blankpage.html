@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warning</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            animation: blink 1.5s step-start infinite;
+        }
+
+        .message {
+            background-color: red;
+            padding: 50px;
+            border-radius: 10px;
+            border: 5px solid #f00;
+            font-size: 40px;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+            animation: danger 3s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0% { background-color: black; color: white; }
+            50% { background-color: red; color: white; }
+            100% { background-color: black; color: white; }
+        }
+
+        @keyframes danger {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <p>Hello, you are under cyberattack.</p>
+    </div>
+</body>
+</html>

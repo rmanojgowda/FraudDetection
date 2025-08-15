@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Payment</title>
+  <script>
+    function fraudMessage() {
+      alert("⚠️ WARNING: Suspicious Transaction Detected!\n\n" +
+            "Amount expected: $30.00\n" +
+            "Amount deducted: $40.00\n\n" +
+            "You may be a victim of fraud. This might occur due to:\n" +
+            "- Scam websites\n" +
+            "- Payment gateway tampering\n" +
+            "- Third-party interception\n\n" +
+            "Now redirecting to our AI-based fraud detection system to investigate.");
+      
+      window.location.href = "../fraud-detection-ml/payment.html"; // Update path as needed
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header class="header">
+    <div class="logo">
+      <img src="amazon_logo.png" alt="Amazon Logo" class="logo-img">
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="#" class="nav-link">Account</a>
+      <a href="#" class="nav-link">Cart</a>
+    </div>
+  </header>
+
+  <!-- Payment Details Section -->
+  <section class="payment">
+    <h2>Enter Payment Details</h2>
+
+    <div class="payment-summary">
+      <p><strong>Expected Amount:</strong> $30.00</p>
+      <p><strong>Amount Deducted:</strong> <span style="color:red;"><b>$40.00</b></span></p>
+      <p style="color:darkred;"><em>This looks like a suspicious transaction. Please verify!</em></p>
+    </div>
+
+    <form action="javascript:void(0);" onsubmit="fraudMessage()">
+      <label for="card-number">Card Number</label>
+      <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
+
+      <label for="expiry">Expiry Date</label>
+      <input type="text" id="expiry" placeholder="MM/YY" required>
+
+      <label for="cvv">CVV</label>
+      <input type="text" id="cvv" placeholder="123" required>
+
+      <label for="otp">OTP</label>
+      <input type="text" id="otp" placeholder="Enter OTP" required>
+
+      <button type="submit" class="pay-now-btn">Pay Now</button>
+    </form>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Header Section */
+        .header {
+            background-color: #232f3e;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .logo img {
+            width: 120px;
+            height: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Product Details Section */
+        .product-details {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 40px;
+            background-color: #f8f8f8;
+            margin-top: 20px;
+        }
+
+        .product-img img {
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-info {
+            max-width: 500px;
+            text-align: left;
+        }
+
+        .product-info h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .product-info p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .product-info strong {
+            font-size: 1.2rem;
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        .buy-now-btn {
+            padding: 15px 25px;
+            font-size: 1rem;
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .buy-now-btn:hover {
+            background-color: #ff7f00;
+        }
+
+        /* Box Images Section */
+        .box-images {
+            padding: 40px;
+            text-align: center;
+            background-color: #fff;
+        }
+
+        .box-images h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .box-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .box-item {
+            text-align: center;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .box-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .box-img {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .box-item p {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .box-item button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #ff9900;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .box-item button:hover {
+            background-color: #ff7f00;
+        }
+
+        /* Footer Section */
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="logo">
+            <img src="amazon_logo.png" alt="Amazon Logo" class="logo-img">
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="#" class="nav-link">Account</a>
+            <a href="#" class="nav-link">Cart</a>
+        </div>
+    </header>
+
+    <!-- Product Details Section -->
+    <section class="product-details">
+        <!-- Dynamic Product Display -->
+        <div class="product-img">
+            <img src="box1_image.jpg" alt="Product 1">
+        </div>
+        <div class="product-info">
+            <h2>Product 1</h2>
+            <p>This is a detailed description of Product 1. It's amazing and has great features!</p>
+            <p><strong>Price: $20.00</strong></p>
+            <button class="buy-now-btn" onclick="window.location.href='payment.html'">Proceed to Payment</button>
+        </div>
+    </section>
+
+    <!-- Box Images Section -->
+    <section class="box-images">
+        <h2>Explore More Categories</h2>
+        <div class="box-container">
+            <div class="box-item">
+                <img src="box1_image.jpg" alt="Box 1" class="box-img">
+                <p>Product 1 - $20.00</p>
+                <button onclick="window.location.href='product.html?product=1'">View Product</button>
+            </div>
+            <div class="box-item">
+                <img src="box2_image.jpg" alt="Box 2" class="box-img">
+                <p>Product 2 - $25.00</p>
+                <button onclick="window.location.href='product.html?product=2'">View Product</button>
+            </div>
+            <div class="box-item">
+                <img src="box3_image.jpg" alt="Box 3" class="box-img">
+                <p>Product 3 - $30.00</p>
+                <button onclick="window.location.href='product.html?product=3'">View Product</button>
+            </div>
+            <div class="box-item">
+                <img src="box4_image.jpg" alt="Box 4" class="box-img">
+                <p>Product 4 - $35.00</p>
+                <button onclick="window.location.href='product.html?product=4'">View Product</button>
+            </div>
+            <div class="box-item">
+                <img src="box5_image.jpg" alt="Box 5" class="box-img">
+                <p>Product 5 - $40.00</p>
+                <button onclick="window.location.href='product.html?product=5'">View Product</button>
+            </div>
+            <div class="box-item">
+                <img src="box6_image.jpg" alt="Box 6" class="box-img">
+                <p>Product 6 - $45.00</p>
+                <button onclick="window.location.href='product.html?product=6'">View Product</button>
+            </div>
+            <div class="box-item">
+                <img src="box7_image.jpg" alt="Box 7" class="box-img">
+                <p>Product 7 - $50.00</p>
+                <button onclick="window.location.href='product.html?product=7'">View Product</button>
+            </div>
+            <div class="box-item">
+                <img src="box8_image.jpg" alt="Box 8" class="box-img">
+                <p>Product 8 - $55.00</p>
+                <button onclick="window.location.href='product.html?product=8'">View Product</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>All rights reserved - Amazon Clone</p>
+    </footer>
+
+    <script>
+        // Adding dynamic content for the product based on the clicked box number
+        const params = new URLSearchParams(window.location.search);
+        const productId = params.get('product');
+        
+        if (productId) {
+            // Update product details based on selected product
+            const productDetails = {
+                1: { img: 'box1_image.jpg', title: 'Product 1', description: 'Detailed description for Product 1.', price: '$20.00' },
+                2: { img: 'box2_image.jpg', title: 'Product 2', description: 'Detailed description for Product 2.', price: '$25.00' },
+                3: { img: 'box3_image.jpg', title: 'Product 3', description: 'Detailed description for Product 3.', price: '$30.00' },
+                4: { img: 'box4_image.jpg', title: 'Product 4', description: 'Detailed description for Product 4.', price: '$35.00' },
+                5: { img: 'box5_image.jpg', title: 'Product 5', description: 'Detailed description for Product 5.', price: '$40.00' },
+                6: { img: 'box6_image.jpg', title: 'Product 6', description: 'Detailed description for Product 6.', price: '$45.00' },
+                7: { img: 'box7_image.jpg', title: 'Product 7', description: 'Detailed description for Product 7.', price: '$50.00' },
+                8: { img: 'box8_image.jpg', title: 'Product 8', description: 'Detailed description for Product 8.', price: '$55.00' }
+            };
+
+            if (productDetails[productId]) {
+                const product = productDetails[productId];
+                document.querySelector('.product-img img').src = product.img;
+                document.querySelector('.product-info h2').textContent = product.title;
+                document.querySelector('.product-info p').textContent = product.description;
+                document.querySelector('.product-info strong').textContent = `Price: ${product.price}`;
+            }
+        }
+    </script>
+</body>
+</html>

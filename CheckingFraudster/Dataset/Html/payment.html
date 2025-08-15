@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Payment Page</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="amazon_logo.png" alt="Amazon Logo">
+        </div>
+        <h1>Payment Page</h1>
+    </header>
+    <div class="payment">
+        <p>Price shown: <span id="shown-price">$0</span></p>
+        <p>Price deducted: <span id="deducted-price">$0</span></p>
+        <form onsubmit="redirectToBlank(); return false;">
+            <label for="credit-card">Enter Credit Card Details:</label>
+            <input type="text" id="credit-card" placeholder="Card Number" required>
+            <button type="submit">Pay</button>
+        </form>
+    </div>
+    <script>
+        // Extract price details from URL
+        const params = new URLSearchParams(window.location.search);
+        const shownPrice = params.get('price');
+
+        const shownPriceElement = document.getElementById('shown-price');
+        const deductedPriceElement = document.getElementById('deducted-price');
+
+        // Display prices (simulate fraudulent deduction)
+        if (shownPrice) {
+            shownPriceElement.innerText = shownPrice;
+            const numericPrice = parseFloat(shownPrice.replace('$', ''));
+            deductedPriceElement.innerText = `$${(numericPrice + 50).toFixed(2)}`; // Adding $50 to simulate fraud
+        }
+
+        // Redirect to blank page
+        function redirectToBlank() {
+            alert('Payment processed successfully! Redirecting...');
+            window.location.href = 'blank.html';
+        }
+    </script>
+</body>
+</html>

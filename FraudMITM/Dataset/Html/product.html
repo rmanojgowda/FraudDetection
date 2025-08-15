@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Product Details</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="amazon_logo.png" alt="Amazon Logo">
+        </div>
+        <h1>Product Details</h1>
+    </header>
+
+    <div class="product-details">
+        <h2 id="product-name">Product Name</h2>
+        <img id="product-image" src="" alt="Product Image">
+        <p>Price: <span id="price">$0</span></p>
+        <button onclick="redirectToPayment()">Buy Now</button>
+    </div>
+
+    <script>
+        // Extract product details from the URL
+        const params = new URLSearchParams(window.location.search);
+        const product = params.get('product'); // Get the product parameter from URL
+        const productName = document.getElementById('product-name');
+        const price = document.getElementById('price');
+        const productImage = document.getElementById('product-image');
+
+        // Populate product details dynamically
+        if (product === '1') {
+            productName.innerText = 'Product 1';
+            price.innerText = '$100';
+            productImage.src = 'product1.jpg';  // Ensure you have this image
+        } else if (product === '2') {
+            productName.innerText = 'Product 2';
+            price.innerText = '$200';
+            productImage.src = 'product2.jpg';  // Ensure you have this image
+        } else {
+            productName.innerText = 'Product Not Found';
+            price.innerText = '$0';
+            productImage.src = 'default.jpg';  // Default image if product ID is invalid
+        }
+
+        // Function to redirect to payment page
+        function redirectToPayment() {
+            const currentPrice = price.innerText;
+            window.location.href = `payment.html?price=${encodeURIComponent(currentPrice)}`;
+        }
+    </script>
+</body>
+</html>
