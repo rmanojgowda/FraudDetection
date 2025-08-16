@@ -5,4 +5,5 @@
 CheckingFraudster/Dataset/creditcard.csv filter=lfs diff=lfs merge=lfs -text
 CheckingFraudster/Dataset/Dataset.zip filter=lfs diff=lfs merge=lfs -text
 FraudMITM/Dataset/creditcard.csv filter=lfs diff=lfs merge=lfs -text
+creditcard.csv filter=lfs diff=lfs merge=lfs -text
 *.csv filter=lfs diff=lfs merge=lfs -text
